@@ -9,59 +9,66 @@ object Tablero {
                                             intArrayOf(9, 10, 11, 12),
                                             intArrayOf(13, 14, 15, 16))
 
-        fun left(fila: Int, columna: Int): Unit{
-            if(columna > 1 &&  pegs[fila][columna] == 1 && pegs[fila][columna-2]== 0 && pegs[fila][columna-1]== 1){
+        fun left(fila: Int): Unit{
 
-                pegs[fila][columna]= 0
-                pegs[fila][columna-1]= 0
-                pegs[fila][columna-2]= 1
 
-            }else{
-                //println("No es posible mover ficha")
-            }
+            var temp1 = pegs[fila][0]
+            var temp2 = pegs[fila][1]
+            var temp3 = pegs[fila][2]
+            var temp4 = pegs[fila][3]
+
+            pegs[fila][0] = temp2
+            pegs[fila][1]= temp3
+            pegs[fila][2]= temp4
+            pegs[fila][3]= temp1
+
 
         }
-        fun right(fila: Int, columna: Int): Unit {
+        fun right(fila: Int): Unit {
 
-            if(columna < 5 &&  pegs[fila][columna] == 1 && pegs[fila][columna+2]== 0 && pegs[fila][columna+1]== 1){
 
-                pegs[fila][columna]= 0
-                pegs[fila][columna+1]= 0
-                pegs[fila][columna+2]= 1
+            var temp1 = pegs[fila][0]
+            var temp2 = pegs[fila][1]
+            var temp3 = pegs[fila][2]
+            var temp4 = pegs[fila][3]
 
-            }else{
-                //println("No es posible mover ficha")
-            }
+            pegs[fila][0] = temp4
+            pegs[fila][1]= temp1
+            pegs[fila][2]= temp2
+            pegs[fila][3]= temp3
+
+
         }
-        fun up(fila: Int, columna: Int): Unit {
+        fun up(columna: Int): Unit {
+
+            var temp1 = pegs[0][columna]
+            var temp2 = pegs[1][columna]
+            var temp3 = pegs[2][columna]
+            var temp4 = pegs[3][columna]
+
+            pegs[0][columna] = temp2
+            pegs[1][columna]= temp3
+            pegs[2][columna]= temp4
+            pegs[3][columna]= temp1
 
 
 
-            if(fila > 1 &&  pegs[fila][columna] == 1 && pegs[fila-1][columna]== 1 && pegs[fila-2][columna]== 0){
-
-                pegs[fila][columna]= 0
-                pegs[fila-1][columna]= 0
-                pegs[fila-2][columna]= 1
-
-
-            }else{
-                //println("No es posible mover ficha")
-            }
         }
-        fun down(fila: Int, columna: Int): Unit {
+        fun down(columna: Int): Unit {
 
 
 
-            if(fila < 5 &&  pegs[fila][columna] == 1 && pegs[fila+1][columna]== 1 && pegs[fila+2][columna]== 0){
+            var temp1 = pegs[0][columna]
+            var temp2 = pegs[1][columna]
+            var temp3 = pegs[2][columna]
+            var temp4 = pegs[3][columna]
 
-                pegs[fila][columna]= 0
-                pegs[fila+1][columna]= 0
-                pegs[fila+2][columna]= 1
+            pegs[0][columna] = temp4
+            pegs[1][columna]= temp3
+            pegs[2][columna]= temp2
+            pegs[3][columna]= temp1
 
 
-            }else{
-                //println("No es posible mover ficha")
-            }
         }
         fun getPeg(): Array<IntArray>{
             return pegs
@@ -72,79 +79,6 @@ object Tablero {
         }
 
     }
-    class Diamante(){
-        var pegsDiamond: Array<IntArray> = arrayOf(intArrayOf(2, 2, 2, 2, 1, 2, 2, 2, 2),
-            intArrayOf(2, 2, 2, 1, 1, 1, 2, 2, 2),
-            intArrayOf(2, 2, 1, 1, 1, 1, 1, 2, 2),
-            intArrayOf(2, 1, 1, 1, 1, 1, 1, 1, 2),
-            intArrayOf(1, 1, 1, 1, 0, 1, 1, 1, 1),
-            intArrayOf(2, 1, 1, 1, 1, 1, 1, 1, 2),
-            intArrayOf(2, 2, 1, 1, 1, 1, 1, 2, 2),
-            intArrayOf(2, 2, 2, 1, 1, 1, 2, 2, 2),
-            intArrayOf(2, 2, 2, 2, 1, 2, 2, 2, 2)
-        )
 
-        fun left(fila: Int, columna: Int): Unit{
-            if(columna > 1 &&  pegsDiamond[fila][columna] == 1 && pegsDiamond[fila][columna-2]== 0 && pegsDiamond[fila][columna-1]== 1){
-
-                pegsDiamond[fila][columna]= 0
-                pegsDiamond[fila][columna-1]= 0
-                pegsDiamond[fila][columna-2]= 1
-
-            }else{
-                //println("No es posible mover ficha")
-            }
-
-        }
-        fun right(fila: Int, columna: Int): Unit {
-
-            if(columna < 7 &&  pegsDiamond[fila][columna] == 1 && pegsDiamond[fila][columna+2]== 0 && pegsDiamond[fila][columna+1]== 1){
-
-                pegsDiamond[fila][columna]= 0
-                pegsDiamond[fila][columna+1]= 0
-                pegsDiamond[fila][columna+2]= 1
-
-            }else{
-                //println("No es posible mover ficha")
-            }
-        }
-        fun up(fila: Int, columna: Int): Unit {
-
-
-
-            if(fila > 1 &&  pegsDiamond[fila][columna] == 1 && pegsDiamond[fila-1][columna]== 1 && pegsDiamond[fila-2][columna]== 0){
-
-                pegsDiamond[fila][columna]= 0
-                pegsDiamond[fila-1][columna]= 0
-                pegsDiamond[fila-2][columna]= 1
-
-
-            }else{
-                //println("No es posible mover ficha")
-            }
-        }
-        fun down(fila: Int, columna: Int): Unit {
-
-
-
-            if(fila < 7 &&  pegsDiamond[fila][columna] == 1 && pegsDiamond[fila+1][columna]== 1 && pegsDiamond[fila+2][columna]== 0){
-
-                pegsDiamond[fila][columna]= 0
-                pegsDiamond[fila+1][columna]= 0
-                pegsDiamond[fila+2][columna]= 1
-
-
-            }else{
-                //println("No es posible mover ficha")
-            }
-        }
-        fun getPeg(): Array<IntArray>{
-            return pegsDiamond
-        }
-        init {
-            //printTablero()
-
-        }
-    }
 
 }

@@ -19,7 +19,7 @@ class MiAdapter(c: Context, array: Array<Int>) : BaseAdapter() {
             iv = ImageView(miContexto)
             iv.layoutParams = AbsListView.LayoutParams(175, 175)
             iv.scaleType = ImageView.ScaleType.CENTER_CROP
-            iv.setPadding(5, 0, 5, 0)
+            iv.setPadding(5, 5, 5, 5)
         } else {
             iv = convertView as ImageView
         }

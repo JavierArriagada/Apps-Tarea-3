@@ -11,6 +11,7 @@ import java.util.ArrayDeque
 class MainActivity : AppCompatActivity() {
 
     private fun transformar(inicial: Array<IntArray>): Array<Int> {
+
         var index = 0
         var newPeg = arrayOf(0,0,0,0,
                             0,0,0,0,
@@ -84,22 +85,20 @@ class MainActivity : AppCompatActivity() {
     public override fun onCreate(savedInstanceState: Bundle?) {
 
 
-        var stack = ArrayDeque<Array<IntArray>>()
-
+        //var stack = ArrayDeque<Array<IntArray>>()
 
 
         var juego = Tablero.puzzle()
 
-        stack.push(juego.getPeg())
+        //stack.push(juego.getPeg())
 
 
-
-        var tablero1 = transformar(stack.last)
+        var tablero1 = transformar(juego.getPeg())
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var count=0
+        var count = 0
 
         val textView: TextView = findViewById(R.id.texto) as TextView
         var contador: String = count.toString()
@@ -117,52 +116,55 @@ class MainActivity : AppCompatActivity() {
         gv.adapter = adapter
 
         var listen = 0
-         var fila = 0
+        var fila = 0
         var columna = 0
         var firstPos = 0
         //var count=0
 
         gv.onItemClickListener = AdapterView.OnItemClickListener { parent, v, pos, id ->
-            if (listen == 1){
-                fila = firstPos/7
-                columna = firstPos%7
-                if (firstPos == pos+2){
+            if (listen == 1) {
+                fila = firstPos / 4
+                columna = firstPos % 4
+                   //deberia funcionar haciendo click primero a una casilla y luego a la que este a la derecha, arriba, abajo o izquierda
+                if (firstPos == pos + 1) {
 
-                    juego.left(fila,columna)
+                    juego.left(fila)
                     count += 1
-                }else if (firstPos == pos-2){
-                    juego.right(fila,columna)
+                } else if (firstPos == pos - 1) {
+                    juego.right(fila)
                     count += 1
-                }else if (firstPos == pos-14){
-                    juego.down(fila,columna)
+                } else if (firstPos == pos - 4) {
+                    juego.down(columna)
                     count += 1
-                }else if (firstPos == pos+14){
-                    juego.up(fila,columna)
-                    count += 1}
+                } else if (firstPos == pos + 4) {
+                    juego.up(columna)
+                    count += 1
+                }
                 contador = count.toString()
                 textView.setText(contador)
-                stack.push(juego.getPeg())
 
-                tablero1 = transformar(stack.last)
+                tablero1 = transformar(juego.getPeg())
                 adapter = MiAdapter(this, tablero1)
                 gv.adapter = adapter
 
                 listen = 0
-            }else {
+            } else {
                 firstPos = pos
+
+                tablero1 = transformar(juego.getPeg())
+                if (tablero1[firstPos] == R.drawable.negro) {
+                    tablero1[firstPos] = R.drawable.rojo
+                    adapter = MiAdapter(this, tablero1)
+                    gv.adapter = adapter
+                    listen = 1
+                }
 
 
             }
-
-
-
-
-
         }
+
+
     }
-
-
-
 
 
 }
